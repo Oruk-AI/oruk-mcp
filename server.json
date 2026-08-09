@@ -1,0 +1,22 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ai.oruk/speech",
+  "title": "oruk Speech",
+  "description": "Hosted speech-to-text and speech emotion/tone analysis for agents: transcription plus calibrated emotion and speaking-style scores from English audio (up to 30 MB / 60 min), model and pricing lookup, and no-account trial keys. The only MCP that scores how something was said, not just the words.",
+  "version": "1.0.0",
+  "websiteUrl": "https://oruk.ai/docs/mcp",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://oruk.ai/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer <oruk API key>. Optional: model/pricing lookup, quickstart, and trial-key minting work without it. Get a key at https://oruk.ai/account (new accounts receive $50 trial credit).",
+          "isRequired": false,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
