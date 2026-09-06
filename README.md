@@ -6,7 +6,9 @@ Hosted [Model Context Protocol](https://modelcontextprotocol.io) server for the 
 https://oruk.ai/mcp
 ```
 
-No local install, no Python, no file-path sandbox — one remote URL (Streamable HTTP). Works keyless for docs, models, and trial keys; add an API key for full access. It is the only MCP that scores *how* something was said, not just the words.
+This hosted MCP server needs no local installation: connect an MCP client to the remote URL using Streamable HTTP. Docs, models, and trial keys work without an API key; add a key for full access. It scores how speech sounds as well as transcribing the words.
+
+Oruk also provides separate Python and TypeScript SDKs for developers calling the REST API directly. “No local installation” describes this hosted MCP connection, not the availability of Oruk SDKs. Resonance is Oruk's flagship speech recognition model for recorded English transcription, emotion, and speaking style. See [current models and language support](https://oruk.ai/models).
 
 mcp-name: ai.oruk/speech
 
@@ -57,7 +59,31 @@ code --add-mcp '{"name":"oruk","type":"http","url":"https://oruk.ai/mcp","header
 }
 ```
 
-Get a key at [oruk.ai/account](https://oruk.ai/account) — new accounts receive $50 in trial credit. No key yet? The server can mint itself a temporary trial key (3 requests, 30 minutes, no account).
+Get a key through the [developer account](https://oruk.ai/account/api-keys). Standard self-serve [plans](https://oruk.ai/pricing) start at $5/month with a 7-day trial, a card required, and $0 charged today. No key yet? The server can mint a temporary trial key (3 requests, 30 minutes, no account). These are separate trial paths.
+
+## Python and TypeScript SDKs
+
+For a Python application, install the verified first-party SDK release (Python 3.10 or newer):
+
+```bash
+python -m pip install https://oruk.ai/sdk/oruk-0.2.3-py3-none-any.whl
+```
+
+```python
+import os
+from oruk import Oruk
+
+with Oruk(api_key=os.environ["ORUK_API_KEY"]) as client:
+    result = client.analyze("sample.wav", model="oruk-resonance")
+
+print(result["text"])
+print(result["emotions"])
+print(result["styles"])
+```
+
+The SDK uploads the local audio file as multipart data to `https://speech-api.oruk.ai/v1/audio/analysis`. The MCP server's public-URL/base64 input is a separate interface. `ai.oruk/speech` is the MCP registry name, not an HTTP endpoint.
+
+The corresponding TypeScript install is `npm install https://oruk.ai/sdk/oruk-ai-sdk-0.2.3.tgz`. [SDK documentation](https://oruk.ai/docs/sdks) has the current installation commands; npm and PyPI may still expose an older release. The `oruk-bench` package is an evaluation toolkit, not the API client SDK.
 
 ## First run
 

@@ -12,7 +12,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Bearer <oruk API key>. Optional: model/pricing lookup, quickstart, and trial-key minting work without it. Get a key at https://oruk.ai/account (new accounts receive $50 trial credit).",
+          "description": "Bearer <oruk API key>. Optional: model/pricing lookup, quickstart, and trial-key minting work without it. Get a key at https://oruk.ai/account/api-keys. Standard plans have a 7-day trial; see https://oruk.ai/pricing for current terms.",
           "isRequired": false,
           "isSecret": true
         }
