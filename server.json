@@ -3,7 +3,7 @@
   "name": "ai.oruk/speech",
   "title": "oruk Speech",
   "description": "Hosted speech-to-text + speech emotion/tone analysis for agents. No install; trial keys built in.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "websiteUrl": "https://oruk.ai/docs/mcp",
   "remotes": [
     {
