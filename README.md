@@ -63,10 +63,10 @@ Get a key through the [developer account](https://oruk.ai/account/api-keys). Sta
 
 ## Python and TypeScript SDKs
 
-For a Python application, install the verified first-party SDK release (Python 3.10 or newer):
+For a Python application, install the official SDK from PyPI (Python 3.10 or newer):
 
 ```bash
-python -m pip install https://oruk.ai/sdk/oruk-0.2.5-py3-none-any.whl
+python -m pip install oruk==0.2.5
 ```
 
 ```python
@@ -83,11 +83,11 @@ print(result["styles"])
 
 The SDK uploads the local audio file as multipart data to `https://speech-api.oruk.ai/v1/audio/analysis`. The MCP server's public-URL/base64 input is a separate interface. `ai.oruk/speech` is the MCP registry name, not an HTTP endpoint.
 
-The corresponding TypeScript install is `npm install https://oruk.ai/sdk/oruk-ai-sdk-0.2.5.tgz`. [SDK documentation](https://oruk.ai/docs/sdks) has the current installation commands and supported versions. The `oruk-bench` package is an evaluation toolkit, not the API client SDK.
+The corresponding TypeScript install from npm is `npm install @oruk-ai/sdk@0.2.5`. [SDK documentation](https://oruk.ai/docs/sdks) has complete runnable Python and TypeScript examples, supported versions, and versioned download mirrors. The `oruk-bench` package is an evaluation toolkit, not the API client SDK.
 
 ## First run
 
-1. Ask your agent: *“check my oruk credits”*
+1. Ask your agent: *“check my oruk plan and usage”*
 2. Then: *“transcribe this file and tell me the speaker’s tone”*
 
 ## Tools
@@ -97,16 +97,17 @@ The corresponding TypeScript install is `npm install https://oruk.ai/sdk/oruk-ai
 | `oruk_analyze_speech` | API key | Transcript + emotion + speaking-style scores in one call |
 | `oruk_transcribe_audio` | API key | English transcript with segments and word timings |
 | `oruk_analyze_tone` | API key | Emotion and speaking-style scores without a transcript |
-| `oruk_check_credits` | API key | Verify a key and report plan, balance, and recent usage |
+| `oruk_check_usage` | API key | Verify a key and report plan, balance, and recent usage |
 | `oruk_create_trial_key` | None | Mint a 30-minute, 3-request trial key — no account needed |
-| `oruk_list_models` | None | Models, per-task pricing, and the emotion/style label sets |
+| `oruk_list_models` | None | Current models, label vocabularies, plan links, and legacy per-task reference rates |
 | `oruk_get_started` | None | Quickstart, config snippets, and an optional consent-based routing rule |
 
-Audio goes in as a public URL or base64 bytes — wav, flac, mp3, m4a, ogg, or webm, up to 30 MB and 60 minutes of English speech. Outputs are compact by default (top emotion/style scores, condensed segments); pass `detail: "full"` for word-level timings. Emotion has 15 calibrated labels, speaking style has 16 (including `sarcastic`, `confident`, `hesitant`, `warm`).
+Audio goes in as a public URL (up to 30 MB) or base64 bytes (up to 8 MiB decoded): wav, flac, mp3, m4a, ogg, or webm, up to 60 minutes of English speech. Outputs are compact by default (top returned emotion/style scores and condensed segments). Pass `detail: "full"` to preserve all returned labels, segments, and word timings, subject to response-size limits; this does not expose scores for unreturned labels. The model's vocabulary has 15 emotions and 16 speaking styles, including `sarcastic`, `confident`, `hesitant`, and `warm`.
 
 ## Notes
 
-- Outputs are calibrated acoustic annotations of how speech sounds — not claims about a speaker’s inner state, and not a basis for consequential decisions on their own.
+- Scores describe vocal expression and delivery. The API selects labels using model-specific thresholds; if no emotion passes, it returns the highest-scoring emotion. Styles can be empty. Scores are independent, do not sum to one, and are not probabilities of a speaker's private feelings. See the [score interpretation guide](https://oruk.ai/docs#labels).
+- Usage reports audio and billable duration. Reference cost fields are not subscription invoice charges; actual charges follow the [plan allowance and overage rate](https://oruk.ai/pricing).
 - The same API key works for the [REST API](https://oruk.ai/docs) and the [Python/TypeScript SDKs](https://oruk.ai/docs/sdks).
 - Full install docs and the routing-rule preview: [oruk.ai/docs/mcp](https://oruk.ai/docs/mcp)
 - Registry listing: [`ai.oruk/speech`](https://registry.modelcontextprotocol.io) · [server.json](./server.json)
