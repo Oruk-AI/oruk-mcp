@@ -66,7 +66,7 @@ Get a key through the [developer account](https://oruk.ai/account/api-keys). Sta
 For a Python application, install the official SDK from PyPI (Python 3.10 or newer):
 
 ```bash
-python -m pip install oruk==0.2.5
+python -m pip install oruk==0.2.6
 ```
 
 ```python
@@ -83,7 +83,7 @@ print(result["styles"])
 
 The SDK uploads the local audio file as multipart data to `https://speech-api.oruk.ai/v1/audio/analysis`. The MCP server's public-URL/base64 input is a separate interface. `ai.oruk/speech` is the MCP registry name, not an HTTP endpoint.
 
-The corresponding TypeScript install from npm is `npm install @oruk-ai/sdk@0.2.5`. [SDK documentation](https://oruk.ai/docs/sdks) has complete runnable Python and TypeScript examples, supported versions, and versioned download mirrors. The `oruk-bench` package is an evaluation toolkit, not the API client SDK.
+The corresponding TypeScript install from npm is `npm install @oruk-ai/sdk@0.2.6`. [SDK documentation](https://oruk.ai/docs/sdks) has complete runnable Python and TypeScript examples, supported versions, and versioned download mirrors. The `oruk-bench` package is an evaluation toolkit, not the API client SDK.
 
 ## First run
 
