@@ -59,14 +59,14 @@ code --add-mcp '{"name":"oruk","type":"http","url":"https://oruk.ai/mcp","header
 }
 ```
 
-Get a key through the [developer account](https://oruk.ai/account/api-keys). Standard self-serve [plans](https://oruk.ai/pricing) start at $5/month with a 7-day trial, a card required, and $0 charged today. No key yet? The server can mint a temporary trial key (3 requests, 30 minutes, no account). These are separate trial paths.
+Get a key through the [developer account](https://oruk.ai/account/api-keys). Standard self-serve [plans](https://oruk.ai/pricing) start at $9/month with a 7-day trial, a card required, and $0 charged today. No key yet? The server can mint a temporary trial key (3 requests, 30 minutes, no account). These are separate trial paths.
 
 ## Python and TypeScript SDKs
 
 For a Python application, install the official SDK from PyPI (Python 3.10 or newer):
 
 ```bash
-python -m pip install oruk==0.2.6
+python -m pip install oruk==0.2.10
 ```
 
 ```python
@@ -83,7 +83,7 @@ print(result["styles"])
 
 The SDK uploads the local audio file as multipart data to `https://speech-api.oruk.ai/v1/audio/analysis`. The MCP server's public-URL/base64 input is a separate interface. `ai.oruk/speech` is the MCP registry name, not an HTTP endpoint.
 
-The corresponding TypeScript install from npm is `npm install @oruk-ai/sdk@0.2.6`. [SDK documentation](https://oruk.ai/docs/sdks) has complete runnable Python and TypeScript examples, supported versions, and versioned download mirrors. The `oruk-bench` package is an evaluation toolkit, not the API client SDK.
+The corresponding TypeScript install from npm is `npm install @oruk-ai/sdk@0.2.10`. [SDK documentation](https://oruk.ai/docs/sdks) has complete runnable Python and TypeScript examples, supported versions, and versioned download mirrors. The `oruk-bench` package is an evaluation toolkit, not the API client SDK.
 
 ## First run
 
