@@ -10,6 +10,8 @@ This hosted MCP server needs no local installation: connect an MCP client to the
 
 Oruk also provides separate Python and TypeScript SDKs for developers calling the REST API directly. “No local installation” describes this hosted MCP connection, not the availability of Oruk SDKs. Resonance is Oruk's flagship speech recognition model for recorded English transcription, emotion, and speaking style. See [current models and language support](https://oruk.ai/models).
 
+[Resonance-2 Preview](https://oruk.ai/docs#resonance-2) has a separate REST route for 31 continuous emotion and speaking-style scores, six signed axes, and selected labels that can be empty. It accepts 0.1–120-second clips up to 30 MiB, using existing API keys and shared speech minutes. It does not return a transcript, diarization or streaming events. The MCP inference tools below support original Resonance and Fourier; call Resonance-2 through ordinary HTTP. SDK 0.2.10 has no dedicated helper for it. [Recorded examples and evaluation limits](https://oruk.ai/research/resonance-2) show the actual output, including mistakes.
+
 mcp-name: ai.oruk/speech
 
 ## Install
