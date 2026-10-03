@@ -8,9 +8,9 @@ https://oruk.ai/mcp
 
 This hosted MCP server needs no local installation: connect an MCP client to the remote URL using Streamable HTTP. Docs, models, and trial keys work without an API key; add a key for full access. It scores how speech sounds as well as transcribing the words.
 
-Oruk also provides separate Python and TypeScript SDKs for developers calling the REST API directly. “No local installation” describes this hosted MCP connection, not the availability of Oruk SDKs. Resonance is Oruk's flagship speech recognition model for recorded English transcription, emotion, and speaking style. See [current models and language support](https://oruk.ai/models).
+Oruk also provides separate Python and TypeScript SDKs for developers calling the REST API directly. “No local installation” describes this hosted MCP connection. The three MCP audio tools accept original Resonance and Fourier for recorded English audio. The model catalog also describes other Oruk models; appearing in that catalog does not make a model callable through these audio tools. See [current models and language support](https://oruk.ai/models).
 
-[Resonance-2 Preview](https://oruk.ai/docs#resonance-2) has a separate REST route for 31 continuous emotion and speaking-style scores, six signed axes, and selected labels that can be empty. It accepts 0.1–120-second clips up to 30 MiB, using existing API keys and shared speech minutes. It does not return a transcript, diarization or streaming events. The MCP inference tools below support original Resonance and Fourier; call Resonance-2 through ordinary HTTP. SDK 0.2.10 has no dedicated helper for it. [Recorded examples and evaluation limits](https://oruk.ai/research/resonance-2) show the actual output, including mistakes.
+[Resonance-2 Preview](https://oruk.ai/docs#resonance-2) has dedicated HTTP and [WebSocket](https://oruk.ai/docs#resonance-2-streaming) routes for 31 continuous emotion and speaking-style scores, six signed axes, and selected labels that can be empty. Organization approval for the model is separate from purchasing a plan. Approved requests use shared speech minutes. Files accept 0.1–120 seconds up to 30 MiB; streaming uses mono 16 kHz float32 little-endian PCM and explicit sample-range commits. Each new commit is a separately metered analysis, including overlapping audio. Neither route returns transcription, diarization or transcript timestamps. These routes are not invoked by the MCP audio tools. Keep bearer keys on the server; follow the protocol's same-ID reconciliation rules after uncertain completion. A 24-hour replay window is not a data-deletion guarantee. [Recorded examples and evaluation limits](https://oruk.ai/research/resonance-2) show the output, including mistakes.
 
 mcp-name: ai.oruk/speech
 
@@ -65,10 +65,10 @@ Get a key through the [developer account](https://oruk.ai/account/api-keys). Sta
 
 ## Python and TypeScript SDKs
 
-For a Python application, install the official SDK from PyPI (Python 3.10 or newer):
+For a Python application, install the verified 0.2.14 SDK from PyPI (Python 3.10 or newer):
 
 ```bash
-python -m pip install oruk==0.2.10
+python -m pip install oruk==0.2.14
 ```
 
 ```python
@@ -85,7 +85,13 @@ print(result["styles"])
 
 The SDK uploads the local audio file as multipart data to `https://speech-api.oruk.ai/v1/audio/analysis`. The MCP server's public-URL/base64 input is a separate interface. `ai.oruk/speech` is the MCP registry name, not an HTTP endpoint.
 
-The corresponding TypeScript install from npm is `npm install @oruk-ai/sdk@0.2.10`. [SDK documentation](https://oruk.ai/docs/sdks) has complete runnable Python and TypeScript examples, supported versions, and versioned download mirrors. The `oruk-bench` package is an evaluation toolkit, not the API client SDK.
+Install the corresponding TypeScript artifact with `npm install https://oruk.ai/sdk/oruk-ai-sdk-0.2.14.tgz`. As verified October 3, 2026, the npm registry has 0.2.10; an unpinned registry install does not select this mirror version. [SDK documentation](https://oruk.ai/docs/sdks) has runnable Python and TypeScript examples and supported versions. The `oruk-bench` package is an evaluation toolkit, not the API client SDK.
+
+## Evaluating a Hume migration
+
+Start with a customer-owned saved response and the [legacy batch comparison guide](https://oruk.ai/compare/hume-expression-measurement-alternative). The supported comparator keeps legacy Hume batch prosody and native Oruk output separate; it does not establish label, score or threshold equivalence. Current Hume Tagger/Prosody, EVI, TTS and streaming payloads need their own contract review. New Oruk inference requires permission to process the recording and uses the applicable account allowance. Do not paste private recordings, response exports or credentials into public issues.
+
+The hosted MCP audio tools are not an EVI conversation stack. STT, LLM, TTS and orchestration choices require separate lifecycle tests; an expression signal alone does not replace them. Spectra-2, Resonance-2, Orukeet and Realtime have model-specific REST or streaming contracts outside the three MCP audio tools.
 
 ## First run
 
