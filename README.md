@@ -6,7 +6,7 @@ Hosted [Model Context Protocol](https://modelcontextprotocol.io) server for the 
 https://oruk.ai/mcp
 ```
 
-This hosted MCP server needs no local installation: connect an MCP client to the remote URL using Streamable HTTP. Docs, models, and trial keys work without an API key; add a key for full access. It scores how speech sounds as well as transcribing the words.
+This hosted MCP server needs no local installation: connect an MCP client to the remote URL using Streamable HTTP. Docs, models, migration planning, and trial keys work without an API key; add a key for full access. It scores how speech sounds as well as transcribing the words.
 
 Oruk also provides separate Python and TypeScript SDKs for developers calling the REST API directly. “No local installation” describes this hosted MCP connection. The three MCP audio tools accept original Resonance and Fourier for recorded English audio. The model catalog also describes other Oruk models; appearing in that catalog does not make a model callable through these audio tools. See [current models and language support](https://oruk.ai/models).
 
@@ -89,6 +89,8 @@ Install the corresponding TypeScript artifact with `npm install https://oruk.ai/
 
 ## Evaluating a Hume migration
 
+`oruk_plan_hume_migration` returns planning guidance from predefined options and counts, without an API key. Keep source code, file paths, audio, credentials and provider responses local. The tool does not inspect code, generate or apply a patch, run inference or establish score equivalence. Source review, integration and validation remain separate steps.
+
 Start with a customer-owned saved response and the [legacy batch comparison guide](https://oruk.ai/compare/hume-expression-measurement-alternative). The supported comparator keeps legacy Hume batch prosody and native Oruk output separate; it does not establish label, score or threshold equivalence. Current Hume Tagger/Prosody, EVI, TTS and streaming payloads need their own contract review. New Oruk inference requires permission to process the recording and uses the applicable account allowance. Do not paste private recordings, response exports or credentials into public issues.
 
 The hosted MCP audio tools are not an EVI conversation stack. STT, LLM, TTS and orchestration choices require separate lifecycle tests; an expression signal alone does not replace them. Spectra-2, Resonance-2, Orukeet and Realtime have model-specific REST or streaming contracts outside the three MCP audio tools.
@@ -102,6 +104,7 @@ The hosted MCP audio tools are not an EVI conversation stack. STT, LLM, TTS and 
 
 | Tool | Auth | What it does |
 |---|---|---|
+| `oruk_plan_hume_migration` | None | Hume batch migration planning from redacted options and counts only |
 | `oruk_analyze_speech` | API key | Transcript + emotion + speaking-style scores in one call |
 | `oruk_transcribe_audio` | API key | English transcript with segments and word timings |
 | `oruk_analyze_tone` | API key | Emotion and speaking-style scores without a transcript |
