@@ -71,6 +71,12 @@ For a Python application, install the verified 0.2.14 SDK from PyPI (Python 3.10
 python -m pip install oruk==0.2.14
 ```
 
+The 0.2.15 Python SDK is also available as a verified first-party wheel, separate from the PyPI release above:
+
+```bash
+python -m pip install https://oruk.ai/sdk/oruk-0.2.15-py3-none-any.whl
+```
+
 ```python
 import os
 from oruk import Oruk
@@ -85,7 +91,13 @@ print(result["styles"])
 
 The SDK uploads the local audio file as multipart data to `https://speech-api.oruk.ai/v1/audio/analysis`. The MCP server's public-URL/base64 input is a separate interface. `ai.oruk/speech` is the MCP registry name, not an HTTP endpoint.
 
-Install the corresponding TypeScript artifact with `npm install https://oruk.ai/sdk/oruk-ai-sdk-0.2.14.tgz`. As verified October 3, 2026, the npm registry has 0.2.10; an unpinned registry install does not select this mirror version. [SDK documentation](https://oruk.ai/docs/sdks) has runnable Python and TypeScript examples and supported versions. The `oruk-bench` package is an evaluation toolkit, not the API client SDK.
+For TypeScript, install the verified 0.2.15 SDK from npm:
+
+```bash
+npm install @oruk-ai/sdk@0.2.15
+```
+
+[SDK documentation](https://oruk.ai/docs/sdks) has runnable Python and TypeScript examples and supported versions. The `oruk-bench` package is an evaluation toolkit, not the API client SDK.
 
 ## Evaluating a Hume migration
 
